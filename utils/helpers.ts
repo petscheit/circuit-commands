@@ -38,11 +38,7 @@ function generateKeyForStorageValue(module: string, variableName: string, parach
 
 export const getHeaderProof = async (api: ApiPromise, blockHash: any, parachainId: number) => {
     let key = generateKeyForStorageValue('Paras', 'Heads', parachainId); // these are correct!
-
-    console.log("Key:", key)
     const proof = await api.rpc.state.getReadProof([key], blockHash);
     console.log("proof:", proof.toHuman())
-    // console.log(`getProofs : success : ${blockHash}`);
-    // return proofs;
+    return proof;
 }
-// 9f434b9dae0bfb8ed4070000
