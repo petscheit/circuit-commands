@@ -20,8 +20,7 @@ class TransferSiseEffect {
         this.transactionTarget = [97, 98, 99, 100];
         this.moonId = [109, 111, 111, 110];
         // .map(() => Math.floor(97 + Math.random() * 26));
-        // this.listener = new SubstrateListener(this.circuit, this.rococo, this.target)
-
+        
         this.rococo = await ApiPromise.create({ 
             provider: new WsProvider("wss://rococo-rpc.polkadot.io"),
         })
@@ -29,6 +28,8 @@ class TransferSiseEffect {
             provider: new WsProvider("ws://127.0.0.1:9944"),
             types: types as any
         })
+
+        this.listener = new SubstrateListener(this.circuit, this.rococo, this.rococoId)
     }
 
     async close() {
@@ -49,6 +50,10 @@ class TransferSiseEffect {
                 await this.registerParachain()
                 break;
             }
+            case "submit_finality_proof": {
+                this.listener.initListener()
+                break;
+            }
             case "submit_transfer": {
                 await submitTransfer(this.circuit, this.transactionTarget);
                 break;
@@ -58,7 +63,6 @@ class TransferSiseEffect {
                 break;
             }
         }
-        // this.close()
     }
 
     async registerRelaychain() {
@@ -72,6 +76,7 @@ class TransferSiseEffect {
     async registerParachain() {
         await registerParachain(this.circuit, this.moonId)
         await this.delay()
+        await setOperational(this.circuit, this.moonId)
         console.log("Registered Moonbeam")
     }
     

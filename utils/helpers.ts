@@ -1,6 +1,7 @@
 import { ApiPromise } from '@polkadot/api';
 // import { u8aToHex, stringToU8a } from '@polkadot/util';
 // import { xxhashAsU8a, xxhashAsHex } from '@polkadot/util-crypto';
+import { decodeCustomType } from "./typeDecoder"
 
 import { u8aConcat, u8aToU8a, u8aToHex } from '@polkadot/util';
 import { xxhashAsU8a } from '@polkadot/util-crypto';
@@ -38,7 +39,14 @@ function generateKeyForStorageValue(module: string, variableName: string, parach
 
 export const getHeaderProof = async (api: ApiPromise, blockHash: any, parachainId: number) => {
     let key = generateKeyForStorageValue('Paras', 'Heads', parachainId); // these are correct!
+    // 0xcd710b30bd2eab0352ddcc26417aa1941b3c252fcb29d88eff4f3de5de4476c39f434b9dae0bfb8ed4070000
+    console.log("key:", key); 
     const proof = await api.rpc.state.getReadProof([key], blockHash);
-    console.log("proof:", proof.toHuman())
-    return proof;
+    let header = await api.rpc.state.getStorage(key, blockHash);
+    
+    // console.log("HEADER FROM STORAGE:", header.toHuman())
+
+    console.log(proof.toJSON())
+
+    return [proof.toJSON(), key];
 }

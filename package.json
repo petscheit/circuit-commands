@@ -11,6 +11,7 @@
     "relay": "ts-node index.ts register_relay",
     "transfer": "ts-node index.ts submit_transfer",
     "parachain": "ts-node index.ts register_parachain",
-    "header": "ts-node index.ts submit_para_header"
+    "header": "ts-node index.ts submit_para_header",
+    "submit": "ts-node index.ts submit_finality_proof"
   }
 }

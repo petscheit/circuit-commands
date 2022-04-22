@@ -256,5 +256,9 @@
         "name": "Type",
         "fields": "Vec<Parameter>",
         "offsets": "Vec<u16>"
+    },
+    "Parachain": {
+        "relay_chain_id": "ChainId",
+        "id": "u32"
     }
 }
