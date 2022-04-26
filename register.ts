@@ -89,6 +89,8 @@ export const register = async(circuit: ApiPromise, target: number[]): Promise<vo
             return res(JSON.parse(stdout));
           });
         })
+
+        console.log("BlockNumber:", blockNumber)
   
         const authorities: any[] = await new Promise((res, rej) => {
           return exec(`./rust_decode/target/release/decode_justification authority_set ${hex_justification}`, (err, stdout, _) => {
@@ -125,7 +127,7 @@ export const register = async(circuit: ApiPromise, target: number[]): Promise<vo
 }
 
 export const registerParachain = async (circuitApi: ApiPromise, target: any[]) => {
-  const moonBeamUrl = 'wss://moonbeam-alpha.api.onfinality.io/public-ws'; // ws endpoint of target chain
+  const moonBeamUrl = 'wss://node-6870830370282213376.rz.onfinality.io/ws?apikey=0f273197-e4d5-45e2-b23e-03b015cb7000'; // ws endpoint of target chain
   const rococoProvider = new WsProvider(moonBeamUrl);
   const moonApi = await ApiPromise.create({ provider: rococoProvider });
 
@@ -144,7 +146,7 @@ export const registerParachain = async (circuitApi: ApiPromise, target: any[]) =
     String.fromCharCode(...target),
     {
       relayChainId: [97, 98, 99, 100],
-      id: 2015
+      id: 2000
     },
     createGatewayABIConfig(circuitApi, 32, 32, 32, 12, 'Sr25519', 'Blake2'),
     //GatewayVendor: 'Substrate' as moon is substrate-based

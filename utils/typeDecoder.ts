@@ -1,5 +1,4 @@
 import { TypeRegistry, createType } from '@polkadot/types';
-
 const registry = new TypeRegistry();
 
 const type = { type: 'Block::Header' }

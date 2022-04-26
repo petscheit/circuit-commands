@@ -25,9 +25,9 @@ export const submitProof = async (justification: any, header: any, gatewayId: an
             console.log("Submitting header proof");
             console.log("Rococo header:", header.hash)
             console.log("Rococo header:", header.toHuman())
-            const [headerProof, key] = await getHeaderProof(rococo, header.hash, 2015)
+            const [headerProof, key] = await getHeaderProof(rococo, header.hash, 2000)
             await submitHeaderProof(headerProof, [97, 98, 99, 100], [109, 111, 111, 110], key, header.hash)
-        }
+        }   
     })
 
     // this.delay();
