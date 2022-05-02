@@ -16,8 +16,8 @@ class TransferSiseEffect {
     moonId: number[];
 
     async setup() {
-        this.rococoId = [97, 98, 99, 100]
-        this.transactionTarget = [97, 98, 99, 100];
+        this.rococoId = [ 114, 111, 99, 111 ]
+        this.transactionTarget = [ 114, 111, 99, 111 ];
         this.moonId = [109, 111, 111, 110];
         // .map(() => Math.floor(97 + Math.random() * 26));
         
