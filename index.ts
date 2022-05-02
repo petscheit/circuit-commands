@@ -13,12 +13,12 @@ class TransferSiseEffect {
     circuit: ApiPromise;
     rococoId: number[];
     transactionTarget: number[];
-    moonId: number[];
+    dolphinId: number[];
 
     async setup() {
         this.rococoId = [ 114, 111, 99, 111 ]
         this.transactionTarget = [ 114, 111, 99, 111 ];
-        this.moonId = [109, 111, 111, 110];
+        this.dolphinId = [ 100, 111, 108, 112 ];
         // .map(() => Math.floor(97 + Math.random() * 26));
         
         this.rococo = await ApiPromise.create({ 
@@ -74,12 +74,12 @@ class TransferSiseEffect {
     }
 
     async registerParachain() {
-        await registerParachain(this.circuit, this.moonId)
+        await registerParachain(this.circuit, this.dolphinId)
         await this.delay()
-        await setOperational(this.circuit, this.moonId)
-        console.log("Registered Moonbeam")
+        await setOperational(this.circuit, this.dolphinId)
+        console.log("Registered Dolphin")
     }
-    
+
     async delay() {
         return new Promise<void>((res, rej) => {
             setTimeout(() => {
