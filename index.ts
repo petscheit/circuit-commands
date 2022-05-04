@@ -4,6 +4,7 @@ import { ApiPromise, WsProvider } from '@polkadot/api';
 import { register, setOperational, registerParachain, getStorageKey } from "./register";
 import types from "./types.json"
 import { submitTransfer } from "./submit";
+import { submitOptimisticTransfer } from './submit_optimistic';
 import { SubstrateListener } from './listener';
 
 
@@ -56,6 +57,10 @@ class TransferSiseEffect {
             }
             case "submit_transfer": {
                 await submitTransfer(this.circuit, this.transactionTarget);
+                break;
+            }
+            case "submit_optimistic_transfer": {
+                await submitOptimisticTransfer(this.circuit, this.transactionTarget);
                 break;
             }
             case "submit_para_header": {
