@@ -5,6 +5,7 @@ import { register, setOperational, registerParachain, getStorageKey } from "./re
 import types from "./types.json"
 import { submitTransfer } from "./submit";
 import { submitOptimisticTransfer } from './submit_optimistic';
+import { submitOptimisticMultiTransfer } from './submit_optimistic_multi';
 import { SubstrateListener } from './listener';
 
 
@@ -61,6 +62,10 @@ class TransferSiseEffect {
             }
             case "submit_optimistic_transfer": {
                 await submitOptimisticTransfer(this.circuit, this.transactionTarget);
+                break;
+            }
+            case "submit_optimistic_multi_transfer": {
+                await submitOptimisticMultiTransfer(this.circuit, this.transactionTarget);
                 break;
             }
             case "submit_para_header": {

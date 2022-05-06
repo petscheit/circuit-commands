@@ -12,6 +12,7 @@
     "relay": "ts-node index.ts register_relay",
     "transfer": "ts-node index.ts submit_transfer",
     "transfer-optimistic": "ts-node index.ts submit_optimistic_transfer",
+    "tom": "ts-node index.ts submit_optimistic_multi_transfer",
     "parachain": "ts-node index.ts register_parachain",
     "header": "ts-node index.ts submit_para_header",
     "submit": "ts-node index.ts submit_finality_proof"
