@@ -143,14 +143,11 @@ export const registerParachain = async (circuitApi: ApiPromise, target: any[]) =
 
   const registerGateway = circuitApi.tx.circuitPortal.registerGateway(
     moonBeamUrl,
-    String.fromCharCode(...target),
-    {
-      relayChainId: [97, 98, 99, 100],
-      id: 2000
-    },
-    createGatewayABIConfig(circuitApi, 32, 32, 32, 12, 'Sr25519', 'Blake2'),
+    "bina",
+    null,
+    createGatewayABIConfig(circuitApi, 32, 32, 20, 18, 'Ecdsa', 'Keccak256'),
     //GatewayVendor: 'Substrate' as moon is substrate-based
-    circuitApi.createType('GatewayVendor', 'Substrate'),
+    circuitApi.createType('GatewayVendor', 'BinanceSmartChain'),
     //GatewayType: we connect as a ProgrammableExternal
     circuitApi.createType('GatewayType', { ProgrammableExternal: 1 }),
     createGatewayGenesisConfig(moonMetadata, moonGenesisHash, circuitApi),
@@ -178,6 +175,3 @@ export const getStorageKey = async (rococoApi: ApiPromise) => {
   getHeaderProof(rococoApi, "0x9958e316f259194d2357c5e0bb3f14534b9c87034727d0af1c1a99e3de5bf8ec", 2004)
 
 }
-
-
-// DEDA5DD53E1D22706AD8D0DDA980DD7811A416E0E28368FA906B01EF3C6A96E656960E006EED942C8FD34F09AEBC3300CDE5B083BA8059ABB95BC157323FF2622D6DFB3A66DBD159B185565FEF489F713AF33E13AC42BC0C14FAFA1BEF7C44EDE05A5A470806617572612066AC32080000000005617572610101D8D79FF7D9F7298229BF60EFD18AB3DA0221A853CFEB8E1FEB246298EE30CB4CE108525F0189D86CC64972E2BC96961D3B86AF2B541066D077B74F7D9829FF80

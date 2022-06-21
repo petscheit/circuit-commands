@@ -2,7 +2,8 @@
     "GatewayVendor": {
         "_enum": [
             "Substrate",
-            "Ethereum"
+            "Ethereum",
+            "BinanceSmartChain"
         ]
     },
     "GatewayType": {
