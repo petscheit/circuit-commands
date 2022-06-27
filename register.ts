@@ -1,7 +1,7 @@
 import{ ApiPromise, Keyring, WsProvider }from'@polkadot/api';
 import{ createGatewayABIConfig, createGatewayGenesisConfig, createGatewaySysProps }from'./utils/utils';
 import{ getHeaderProof } from "./utils/helpers";
-
+import { decodeJustification } from './utils/typeDecoder';
 const { exec } = require('child_process');
 
 const triggerRegister = async (circuit: ApiPromise, params: any) => {
@@ -77,36 +77,14 @@ export const register = async(circuit: ApiPromise, target: number[]): Promise<vo
 
     return new Promise(async (res, rej) => {
       let listener = await api.rpc.grandpa.subscribeJustifications(async (justification: any) => {
-        let hex_justification = justification.toString().substring(2) // removes 0x
-        const blockNumber: any = await new Promise((res, rej) => {
-          return exec(`./rust_decode/target/release/decode_justification blocknumber ${hex_justification}`, (err, stdout, _) => {
-            if (err) {
-              throw err
-            }
-            if (stdout.includes("Error")) {
-              throw new Error("GrandpaJustification decoding failed!")
-            }
-            return res(JSON.parse(stdout));
-          });
-        })
-
-        console.log("BlockNumber:", blockNumber)
-  
-        const authorities: any[] = await new Promise((res, rej) => {
-          return exec(`./rust_decode/target/release/decode_justification authority_set ${hex_justification}`, (err, stdout, _) => {
-            if (err) {
-              throw err
-            }
-            if (stdout.includes("Error")) {
-              throw new Error("GrandpaJustification decoding failed!")
-            }
-            return res(JSON.parse(stdout));
-          });
-        })
+        let [authorities, blockNumber] = decodeJustification(justification)
+        console.log("Registering With Block:", parseInt(blockNumber))
   
         const rococoRegistrationHeader = await api.rpc.chain.getHeader(
           await api.rpc.chain.getBlockHash(blockNumber)
         )
+
+        // console.log("Header:", rococoRegistrationHeader)
         const authoritySetId = await api.query.grandpa.currentSetId()
   
         await triggerRegister(circuit, {
@@ -143,11 +121,14 @@ export const registerParachain = async (circuitApi: ApiPromise, target: any[]) =
 
   const registerGateway = circuitApi.tx.circuitPortal.registerGateway(
     moonBeamUrl,
-    "bina",
-    null,
-    createGatewayABIConfig(circuitApi, 32, 32, 20, 18, 'Ecdsa', 'Keccak256'),
+    String.fromCharCode(...target),
+    {
+      relayChainId: [97, 98, 99, 100],
+      id: 2000
+    },
+    createGatewayABIConfig(circuitApi, 32, 32, 32, 12, 'Sr25519', 'Blake2'),
     //GatewayVendor: 'Substrate' as moon is substrate-based
-    circuitApi.createType('GatewayVendor', 'BinanceSmartChain'),
+    circuitApi.createType('GatewayVendor', 'Substrate'),
     //GatewayType: we connect as a ProgrammableExternal
     circuitApi.createType('GatewayType', { ProgrammableExternal: 1 }),
     createGatewayGenesisConfig(moonMetadata, moonGenesisHash, circuitApi),

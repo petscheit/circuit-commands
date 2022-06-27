@@ -4,14 +4,14 @@ const { ApiPromise } = require('@polkadot/api');
 export const scaleEncodeHeader = async (rpcBlock: any,) => {
     const api = await ApiPromise.create({ types });
     let poaBlock = rpcBlock;
-    poaBlock['chainId'] = 97;
+    poaBlock['chainId'] = 56;
     delete poaBlock.hash;
     delete poaBlock.size;
 
     poaBlock = formatExtraData(poaBlock);
 
     let header = api.createType('BscHeader', poaBlock)
-    console.log("SCALE HEADER:", header.toHex())
+    console.log("SCALE HEADER:", header.toHuman())
     return header.toHex()
 }
 

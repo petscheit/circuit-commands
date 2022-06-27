@@ -17,7 +17,7 @@ export function createGatewayABIConfig(
     api.createType('HasherAlgo', hasher),
     api.createType('CryptoAlgo', crypto),
     api.createType('u16', address_length),
-    api.createType('u16', 16),
+    api.createType('u16', 32),
     api.createType('u16', decimals),
     api.createType('Vec<StructDecl>', []),
   ]);

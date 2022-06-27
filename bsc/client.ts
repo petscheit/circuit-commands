@@ -4,7 +4,7 @@ import types from '../types.json';
 
 
 export const getInstances = async () => {
-    const bscInstance = new Web3('wss://bsc-ws-node.nariox.org:443');
+    const bscInstance = new Web3('https://bscrpc.com');
     
     const provider = new WsProvider("ws://localhost:9944");
     const circuit = await ApiPromise.create({ provider, types: types as any });
