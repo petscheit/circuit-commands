@@ -338,7 +338,7 @@ dependencies = [
 name = "decode_justification"
 version = "0.1.0"
 dependencies = [
- "finality-grandpa",
+ "finality-grandpa 0.16.0",
  "frame-support",
  "hex-literal",
  "parity-scale-codec",
@@ -479,6 +479,22 @@ dependencies = [
  "num-traits",
  "parity-scale-codec",
  "parking_lot 0.11.2",
+ "scale-info",
+]
+
+[[package]]
+name = "finality-grandpa"
+version = "0.16.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b22349c6a11563a202d95772a68e0fcf56119e74ea8a2a19cf2301460fcd0df5"
+dependencies = [
+ "either",
+ "futures",
+ "futures-timer",
+ "log",
+ "num-traits",
+ "parity-scale-codec",
+ "parking_lot 0.12.1",
  "scale-info",
 ]
 
@@ -1788,7 +1804,7 @@ name = "sp-finality-grandpa"
 version = "4.0.0-dev"
 source = "git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.21#563f4820d8f36d256ada7ea3fef46b2e94c4cd5a"
 dependencies = [
- "finality-grandpa",
+ "finality-grandpa 0.15.0",
  "log",
  "parity-scale-codec",
  "scale-info",
