@@ -6,15 +6,13 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-codec = { package = "parity-scale-codec", version = "3.1.5", default-features = true }
-finality-grandpa = { version = "0.16.0", default-features = true }
+codec = { package = "parity-scale-codec", version = "3.1.5", features = ["derive"] }
+finality-grandpa = { version = "0.16.0", features = ["derive-codec"] }
 scale-info = { version = "2.1.1", default-features = true}
-frame-support = { default-features = true, git = "https://github.com/paritytech/substrate.git", branch = 'polkadot-v0.9.21' }
-sp-finality-grandpa = { git = "https://github.com/paritytech/substrate", version = '4.0.0-dev' }
-sp-std = { git = "https://github.com/paritytech/substrate.git", branch = 'polkadot-v0.9.21' }
-sp-runtime = { git = "https://github.com/paritytech/substrate", branch = 'polkadot-v0.9.21' }
-sp-core = { git = "https://github.com/paritytech/substrate.git", branch = 'polkadot-v0.9.21' }
-serde = { version = "1.0.105", features = ["derive"] }
-serde_json = "1.0.50"
+
+frame-support = { default-features = true, git = "https://github.com/paritytech/substrate.git", branch = 'master' }
+sp-finality-grandpa = { git = "https://github.com/paritytech/substrate.git", branch = 'master' }
+sp-std = { git = "https://github.com/paritytech/substrate.git", branch = 'master' }
+sp-runtime = { git = "https://github.com/paritytech/substrate.git", branch = 'master' }
+sp-core = { git = "https://github.com/paritytech/substrate.git", branch = 'master' }
 hex-literal = "0.3.4"
-parity-scale-codec-derive = "3.1.3"
