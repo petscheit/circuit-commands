@@ -18,13 +18,13 @@ class TransferSiseEffect {
     dolphinId: number[];
 
     async setup() {
-        this.rococoId = [ 114, 111, 99, 111 ]
+        this.rococoId = [114, 111, 99, 111]
         this.transactionTarget = [ 114, 111, 99, 111 ];
         this.dolphinId = [ 100, 111, 108, 112 ];
         // .map(() => Math.floor(97 + Math.random() * 26));
         
         this.rococo = await ApiPromise.create({ 
-            provider: new WsProvider("wss://rococo-rpc.polkadot.io"),
+            provider: new WsProvider("wss://rpc.polkadot.io"),
         })
         this.circuit = await ApiPromise.create({
             provider: new WsProvider("ws://127.0.0.1:9944"),

@@ -13,15 +13,15 @@ export const decodeCustomType = (type: string, data: string) => {
     return res;
 }
 
-    const type = { type: 'GrandpaJustification<Header>' }
-    export const decodeJustification = (data: any) => {
-        // const typeObject = { type }
-        console.log(data.toHex())
-        registry.register(type);
-        const res = createType(registry, type.type as any, data)
+const type = { type: 'GrandpaJustification<Header>' }
+export const decodeJustification = (data: any) => {
+    // const typeObject = { type }
+    console.log(data.toHex())
+    registry.register(type);
+    const res = createType(registry, type.type as any, data)
 
-        return [getAuthorities(res.commit.precommits), res.commit.targetNumber]
-    }
+    return [getAuthorities(res.commit.precommits), res.commit.targetNumber]
+}
 
 const getAuthorities = (precommits: any[]) => {
     let res = [];

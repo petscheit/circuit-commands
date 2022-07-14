@@ -19,7 +19,7 @@ const getLatestEpochBlock = async () => {
 export const registerBSC = async () => {
     const registerGateway = circuit.tx.circuitPortal.registerGateway(
         "wss://bsc-ws-node.nariox.org:443",
-        "bina",
+        "secr",
         null,
         createGatewayABIConfig(circuit, 32, 20, 32, 18, 'Ecdsa', 'Keccak256'),
         //GatewayVendor: 'Substrate' as moon is substrate-based
@@ -52,7 +52,7 @@ export const submitTransfer = async () => {
         .onExtrinsicTrigger(
             [
                 {
-                    target: [98, 105, 110, 97], //bina
+                    target: [115, 101, 99, 114], //secr
                     prize: 0,
                     ordered_at: 0,
                     encoded_action: [101, 116, 114, 97], //etra

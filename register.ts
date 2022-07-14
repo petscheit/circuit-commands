@@ -26,7 +26,7 @@ const triggerRegister = async (circuit: ApiPromise, params: any) => {
         //GatewayType: we connect as a ProgrammableExternal
         circuit.createType('GatewayType', { ProgrammableExternal: 1 }),
         createGatewayGenesisConfig(metadata, genesisHash, circuit),
-        createGatewaySysProps(circuit, 60, '', 0), // GatewaySysProps
+        createGatewaySysProps(circuit, 60, 'ROC', 12), // GatewaySysProps
         //Initial rococo, acts as gateway activation point
         circuit.createType('Bytes', rococoRegistrationHeader.toHex()),
         //List of current rococo authorities
